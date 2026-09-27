@@ -11,6 +11,16 @@ The farm (Originator) creates its own save when the player goes to bed. The save
 | Caretaker | `src/SaveSlot.php` |
 | Client | `farmgame.php` |
 
+## Screenshots
+
+Running the game:
+
+![Running farmgame.php](images/running-farmgame.png)
+
+Syntax check (`php -l`):
+
+![php -l screenshot](images/php-l-screenshot.png)
+
 ## Requirements
 
 PHP 8.1 or newer. No external libraries.
