@@ -1,0 +1,34 @@
+@startuml memento-farm-class
+interface SaveFile {
+  +day(): int
+  +savedAt(): DateTimeImmutable
+}
+class FarmSave {
+  -day: int
+  -gold: int
+  -energy: int
+  -inventory: array
+  -version: string
+  +state(): array
+}
+class Farm {
+  -day: int
+  -gold: int
+  -energy: int
+  -inventory: array
+  +harvest(crop, qty)
+  +sell(crop, qty, price)
+  +sleep(): SaveFile
+  +load(save: SaveFile)
+}
+class SaveSlot {
+  -saves: SaveFile[]
+  -keep: int
+  +store(save: SaveFile)
+  +latest(): SaveFile
+  +menu(): string
+}
+SaveFile <|.. FarmSave
+Farm ..> FarmSave : creates / reads
+SaveSlot o-- SaveFile : keeps
+@enduml

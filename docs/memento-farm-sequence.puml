@@ -1,0 +1,25 @@
+@startuml memento-farm-sequence
+actor Player
+participant "SaveSlot\n(Caretaker)" as Slot
+participant "Farm\n(Originator)" as Farm
+participant "FarmSave\n(Memento)" as Save
+
+Player -> Farm : sleep()
+activate Farm
+Farm -> Save ** : new FarmSave(day, gold, energy, inventory, version)
+Farm --> Player : SaveFile
+deactivate Farm
+Player -> Slot : store(save)
+note right of Slot : oldest save dropped\nwhen over $keep
+Player -> Farm : harvest(), sell()
+note over Player : quits before bedtime
+Player -> Slot : menu()
+Slot -> Save : day(), savedAt()
+Player -> Slot : latest()
+Slot --> Player : SaveFile
+Player -> Farm : load(save)
+activate Farm
+Farm -> Save : state()
+Save --> Farm : gold, energy, inventory, version
+deactivate Farm
+@enduml
